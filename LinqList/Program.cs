@@ -104,6 +104,11 @@ namespace LinqList
             new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
             };
 
+            var millionaires =
+                from customer in customers
+                where customer.Balance >= 1000000
+                select $"{customer.Name}";
+
         }
     }
 }
