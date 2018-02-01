@@ -13,10 +13,14 @@ namespace LinqList
             // Find the words in the collection that start with the letter 'L'
             List<string> fruits = new List<string>() { "Lemon", "Apple", "Orange", "Lime", "Watermelon", "Loganberry" };
 
-            //var LFruits =
-            //    from fruit in fruits
-            //    where fruit[0] is L
-            //    select fruit;
+            var LFruits =
+                from fruit in fruits
+                where fruit[0] == 'L'
+                select fruit;
+
+            var listOfLfruits = LFruits.ToList();
+
+            listOfLfruits.ForEach(fruit => Console.WriteLine(fruit));
 
 
             // Which of the following numbers are multiples of 4 or 6
@@ -25,6 +29,11 @@ namespace LinqList
                 15, 8, 21, 24, 32, 13, 30, 12, 7, 54, 48, 4, 49, 96
             };
 
+            var multiplesFourSix = numbers.Where(n => n % 4 == 0 || n % 6 == 0);
+
+            var multiples = multiplesFourSix.ToList();
+
+            multiples.ForEach(number => Console.WriteLine(number));
 
 
             // Build a collection of these numbers sorted in ascending order
@@ -42,8 +51,8 @@ namespace LinqList
                 numbers.Count();
 
             Console.WriteLine(numberOfNumbers);
-               
-                
+
+
             // Order these student names alphabetically, in descending order (Z to A)
             List<string> names = new List<string>()
             {
@@ -60,7 +69,7 @@ namespace LinqList
             {
                 Console.WriteLine(s);
             }
-            
+
 
             // How much money have we made?
             List<double> purchases = new List<double>()
@@ -80,6 +89,8 @@ namespace LinqList
 
             var mostExpensive = prices.Max(price => price);
 
+            Console.WriteLine(mostExpensive);
+
             /*
             Store each number in the following List until a perfect square
             is detected.
@@ -89,6 +100,8 @@ namespace LinqList
             {
                 66, 12, 8, 27, 82, 34, 7, 50, 19, 46, 81, 23, 30, 4, 68, 14
             };
+
+         
 
             // Build a collection of customers who are millionaires
             List<Customer> customers = new List<Customer>() {
@@ -108,6 +121,38 @@ namespace LinqList
                 from customer in customers
                 where customer.Balance >= 1000000
                 select $"{customer.Name}";
+
+            var listOfmillionaires = millionaires.ToList();
+
+            listOfmillionaires.ForEach(millionaire => Console.WriteLine(millionaire));
+
+            /* 
+              Given the same customer set, display how many millionaires per bank.
+
+              Example Output:
+              WF 2
+              BOA 1
+              FTB 1
+              CITI 1
+          */
+
+            var howManyMillionaires = from customer in millionaires
+                                      group customer by customer into millionaireByBank
+                                      select new { Bank = millionaireByBank.Key, theMillionaires = millionaireByBank.Count() };
+
+                    /*
+            TASK:
+            As in the previous exercise, you're going to output the millionaires,
+            but you will also display the full name of the bank. You also need
+            to sort the millionaires' names, ascending by their LAST name.
+
+            Example output:
+                Tina Fey at Citibank
+                Joe Landy at Wells Fargo
+                Sarah Ng at First Tennessee
+                Les Paul at Wells Fargo
+                Peg Vale at Bank of America
+        */
 
         }
     }
